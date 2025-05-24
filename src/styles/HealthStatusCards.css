@@ -1,0 +1,9 @@
+.health-status-cards {
+  display: flex;
+  gap: 16px;
+}
+.health-card {
+  background-color: #f9f7f7;
+  padding: 16px;
+  border-radius: 12px;
+}

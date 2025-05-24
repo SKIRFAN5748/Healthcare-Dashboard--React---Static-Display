@@ -1,0 +1,471 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Healthcare Dashboard
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Custom scrollbar for activity chart container */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+ </head>
+ <body class="bg-[#f0f4ff] min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-[1200px] w-full bg-white rounded-3xl p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 shadow-lg">
+   <!-- Sidebar -->
+   <aside class="flex flex-col justify-between bg-[#e8efff] rounded-3xl w-full md:w-52 p-6 select-none">
+    <div>
+     <h1 class="text-2xl font-extrabold mb-10">
+      <span class="text-[#00d8ff]">
+       Health
+      </span>
+      <span class="text-black">
+       care.
+      </span>
+     </h1>
+    </div>
+    <nav class="flex flex-col gap-6 text-gray-400 text-sm font-semibold">
+     <a aria-current="page" class="flex items-center gap-3 text-black font-bold cursor-default" href="#">
+      <i class="fas fa-th-large text-lg">
+      </i>
+      Dashboard
+     </a>
+     <a class="flex items-center gap-3 hover:text-black transition-colors duration-200" href="#">
+      <i class="fas fa-history text-lg">
+      </i>
+      History
+     </a>
+     <a class="flex items-center gap-3 hover:text-black transition-colors duration-200" href="#">
+      <i class="fas fa-calendar-alt text-lg">
+      </i>
+      Calendar
+     </a>
+     <a class="flex items-center gap-3 hover:text-black transition-colors duration-200" href="#">
+      <i class="fas fa-user-clock text-lg">
+      </i>
+      Appointments
+     </a>
+     <a class="flex items-center gap-3 hover:text-black transition-colors duration-200" href="#">
+      <i class="fas fa-chart-bar text-lg">
+      </i>
+      Statistics
+     </a>
+    </nav>
+    <nav class="flex flex-col gap-6 text-gray-400 text-sm font-semibold mt-10">
+     <a class="flex items-center gap-3 hover:text-black transition-colors duration-200" href="#">
+      <i class="fas fa-comment-alt text-lg">
+      </i>
+      Chat
+     </a>
+     <a class="flex items-center gap-3 hover:text-black transition-colors duration-200" href="#">
+      <i class="fas fa-phone-alt text-lg">
+      </i>
+      Support
+     </a>
+    </nav>
+    <div class="text-gray-400 text-sm font-semibold mt-10 flex items-center gap-2 cursor-default select-none">
+     <i class="fas fa-cog text-lg">
+     </i>
+     Setting
+    </div>
+   </aside>
+   <!-- Main content -->
+   <main class="flex-1 flex flex-col gap-6">
+    <!-- Top bar with search and profile -->
+    <div class="flex justify-between items-center">
+     <form aria-label="Site Search" class="flex items-center bg-[#f9faff] rounded-lg px-4 py-2 w-full max-w-md border border-transparent focus-within:border-[#3b82f6] transition-colors" role="search">
+      <i class="fas fa-search text-gray-400 mr-3">
+      </i>
+      <input aria-label="Search" class="bg-transparent outline-none text-gray-700 placeholder-gray-400 w-full text-sm" placeholder="Search" type="search"/>
+     </form>
+     <button aria-label="Notifications" class="ml-6 text-[#3b3bff] text-xl relative">
+      <i class="fas fa-bell">
+      </i>
+     </button>
+     <div class="ml-6 w-10 h-10 rounded-full overflow-hidden border-2 border-[#3b3bff] cursor-pointer" title="User Profile">
+      <img alt="User avatar with short brown hair and a friendly smile" class="w-full h-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/0b9acfa3-55fe-40e5-122b-344d764ad11d.jpg" width="40"/>
+     </div>
+     <button aria-label="Add new" class="ml-6 w-10 h-10 rounded-lg bg-[#3b3bff] text-white flex items-center justify-center text-2xl font-bold">
+      +
+     </button>
+    </div>
+    <!-- Dashboard header -->
+    <div class="flex justify-between items-center">
+     <h2 class="text-xl font-extrabold text-[#1a1a1a]">
+      Dashboard
+     </h2>
+     <button aria-label="Select week" class="text-xs text-gray-400 flex items-center gap-1 hover:text-[#3b3bff] transition-colors">
+      This Week
+      <i class="fas fa-chevron-down text-[10px]">
+      </i>
+     </button>
+    </div>
+    <!-- Dashboard main content -->
+    <div class="flex flex-col md:flex-row gap-6 md:gap-10">
+     <!-- Left side: Human body and health stats -->
+     <section class="flex-1 flex flex-col gap-6">
+      <div class="bg-[#f9faff] rounded-2xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
+       <!-- Human body image with annotations -->
+       <div class="relative flex-shrink-0 w-full md:w-[220px] h-[320px]">
+        <img alt="Front view of human muscular system anatomical illustration" class="w-full h-full object-contain" height="320" src="https://storage.googleapis.com/a1aa/image/1bb4940c-5071-4c35-05ce-edfc687c3c87.jpg" width="220"/>
+        <!-- Healthy Heart label -->
+        <div class="absolute top-16 left-[110px] bg-[#3b3bff] text-white text-xs font-semibold rounded-full px-3 py-1 flex items-center gap-1 cursor-pointer select-none" style="box-shadow: 0 0 10px #3b3bff;">
+         <i class="fas fa-heart">
+         </i>
+         Healthy Heart
+        </div>
+        <!-- Healthy Leg label -->
+        <div class="absolute bottom-20 left-6 bg-[#00d8ff] text-white text-xs font-semibold rounded-full px-3 py-1 flex items-center gap-1 cursor-pointer select-none" style="box-shadow: 0 0 10px #00d8ff;">
+         <i class="fas fa-walking">
+         </i>
+         Healthy Leg
+        </div>
+        <!-- Zoom icons top right and bottom center -->
+        <button aria-label="Zoom in" class="absolute top-3 right-3 text-gray-400 hover:text-[#3b3bff] transition-colors">
+         <i class="fas fa-search-plus">
+         </i>
+        </button>
+        <button aria-label="Zoom out" class="absolute bottom-3 left-1/2 -translate-x-1/2 text-gray-400 hover:text-[#3b3bff] transition-colors">
+         <i class="fas fa-search-minus">
+         </i>
+        </button>
+       </div>
+       <!-- Health stats cards -->
+       <div class="flex flex-col gap-4 w-full md:w-[220px]">
+        <!-- Lungs -->
+        <div class="bg-[#f9faff] rounded-2xl p-4 flex items-center gap-4 shadow-inner">
+         <img alt="Icon of lungs in red color" class="w-10 h-10 flex-shrink-0" height="40" src="https://storage.googleapis.com/a1aa/image/e5bd054e-661f-4946-1608-73efc93262d5.jpg" width="40"/>
+         <div class="flex-1">
+          <h3 class="font-semibold text-sm text-[#1a1a1a]">
+           Lungs
+          </h3>
+          <p class="text-xs text-gray-400">
+           Date: 26 Oct 2021
+          </p>
+          <div class="w-full h-2 rounded-full bg-[#e0e0e0] mt-1">
+           <div class="h-2 rounded-full bg-[#f87171]" style="width: 60%;">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Teeth -->
+        <div class="bg-[#f9faff] rounded-2xl p-4 flex items-center gap-4 shadow-inner">
+         <img alt="Icon of a tooth in white color" class="w-10 h-10 flex-shrink-0" height="40" src="https://storage.googleapis.com/a1aa/image/bc7be043-71c6-4af1-f018-003530a79ef8.jpg" width="40"/>
+         <div class="flex-1">
+          <h3 class="font-semibold text-sm text-[#1a1a1a]">
+           Teeth
+          </h3>
+          <p class="text-xs text-gray-400">
+           Date: 26 Oct 2021
+          </p>
+          <div class="w-full h-2 rounded-full bg-[#e0e0e0] mt-1">
+           <div class="h-2 rounded-full bg-[#34d399]" style="width: 70%;">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Bone -->
+        <div class="bg-[#f9faff] rounded-2xl p-4 flex items-center gap-4 shadow-inner">
+         <img alt="Icon of a bone in gray color" class="w-10 h-10 flex-shrink-0" height="40" src="https://storage.googleapis.com/a1aa/image/6841cbc8-91a8-4190-345f-1525e7275881.jpg" width="40"/>
+         <div class="flex-1">
+          <h3 class="font-semibold text-sm text-[#1a1a1a]">
+           Bone
+          </h3>
+          <p class="text-xs text-gray-400">
+           Date: 26 Oct 2021
+          </p>
+          <div class="w-full h-2 rounded-full bg-[#e0e0e0] mt-1">
+           <div class="h-2 rounded-full bg-[#f87171]" style="width: 50%;">
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Activity chart -->
+      <div class="bg-[#f9faff] rounded-2xl p-4 flex flex-col gap-2 select-none">
+       <div class="flex justify-between items-center mb-2">
+        <h3 class="font-semibold text-sm text-[#1a1a1a]">
+         Activity
+        </h3>
+        <p class="text-xs text-gray-400">
+         3 appointment on this week
+        </p>
+       </div>
+       <div class="overflow-x-auto scrollbar-hide">
+        <svg aria-hidden="true" class="w-[350px] h-20" fill="none" role="img" viewbox="0 0 350 80" xmlns="http://www.w3.org/2000/svg">
+         <!-- Background grid lines -->
+         <line stroke="#d1d5db" stroke-width="1" x1="0" x2="350" y1="60" y2="60">
+         </line>
+         <line stroke="#d1d5db" stroke-width="1" x1="0" x2="350" y1="40" y2="40">
+         </line>
+         <line stroke="#d1d5db" stroke-width="1" x1="0" x2="350" y1="20" y2="20">
+         </line>
+         <!-- Bars for each day -->
+         <!-- Mon -->
+         <rect fill="#3b82f6" height="20" rx="2" width="10" x="10" y="40">
+         </rect>
+         <rect fill="#00d8ff" height="30" rx="2" width="10" x="25" y="30">
+         </rect>
+         <rect fill="#a3a3a3" height="10" rx="2" width="10" x="40" y="50">
+         </rect>
+         <!-- Tues -->
+         <rect fill="#3b82f6" height="40" rx="2" width="10" x="70" y="20">
+         </rect>
+         <rect fill="#00d8ff" height="50" rx="2" width="10" x="85" y="10">
+         </rect>
+         <rect fill="#a3a3a3" height="20" rx="2" width="10" x="100" y="40">
+         </rect>
+         <!-- Wed -->
+         <rect fill="#3b82f6" height="30" rx="2" width="10" x="130" y="30">
+         </rect>
+         <rect fill="#00d8ff" height="40" rx="2" width="10" x="145" y="20">
+         </rect>
+         <rect fill="#a3a3a3" height="10" rx="2" width="10" x="160" y="50">
+         </rect>
+         <!-- Thurs -->
+         <rect fill="#3b82f6" height="20" rx="2" width="10" x="190" y="40">
+         </rect>
+         <rect fill="#00d8ff" height="30" rx="2" width="10" x="205" y="30">
+         </rect>
+         <rect fill="#a3a3a3" height="10" rx="2" width="10" x="220" y="50">
+         </rect>
+         <!-- Fri -->
+         <rect fill="#3b82f6" height="40" rx="2" width="10" x="250" y="20">
+         </rect>
+         <rect fill="#00d8ff" height="50" rx="2" width="10" x="265" y="10">
+         </rect>
+         <rect fill="#a3a3a3" height="20" rx="2" width="10" x="280" y="40">
+         </rect>
+         <!-- Sat -->
+         <rect fill="#3b82f6" height="30" rx="2" width="10" x="310" y="30">
+         </rect>
+         <rect fill="#00d8ff" height="40" rx="2" width="10" x="325" y="20">
+         </rect>
+         <rect fill="#a3a3a3" height="10" rx="2" width="10" x="340" y="50">
+         </rect>
+        </svg>
+       </div>
+      </div>
+     </section>
+     <!-- Right side: Calendar and schedule -->
+     <section class="flex-1 flex flex-col gap-6">
+      <!-- Calendar -->
+      <div class="bg-[#f9faff] rounded-2xl p-6 flex flex-col gap-6 select-none">
+       <div class="flex justify-between items-center">
+        <h3 class="font-semibold text-sm text-[#1a1a1a]">
+         October 2021
+        </h3>
+        <div class="flex items-center gap-3 text-[#3b3bff] text-lg cursor-pointer select-none">
+         <i class="fas fa-chevron-left">
+         </i>
+         <i class="fas fa-chevron-right">
+         </i>
+        </div>
+       </div>
+       <div class="grid grid-cols-7 text-center text-xs font-semibold text-gray-400 select-none">
+        <div>
+         Mon
+        </div>
+        <div>
+         Tues
+        </div>
+        <div>
+         Wed
+        </div>
+        <div>
+         Thurs
+        </div>
+        <div>
+         Fri
+        </div>
+        <div>
+         Sat
+        </div>
+        <div>
+         Sun
+        </div>
+       </div>
+       <div class="grid grid-cols-7 text-center text-xs font-semibold text-[#1a1a1a]">
+        <!-- Mon 25 -->
+        <div class="py-1 border border-transparent">
+         25
+         <br/>
+         <span class="text-[10px]">
+          10:00
+         </span>
+        </div>
+        <!-- Tues 26 -->
+        <div class="py-1 border border-transparent bg-[#3b3bff] text-white rounded-lg">
+         26
+         <br/>
+         <span class="text-[10px]">
+          08:00
+          <br/>
+          09:00
+         </span>
+        </div>
+        <!-- Wed 27 -->
+        <div class="py-1 border border-transparent">
+         27
+         <br/>
+         <span class="text-[10px]">
+          12:00
+          <br/>
+          10:00
+         </span>
+        </div>
+        <!-- Thurs 28 -->
+        <div class="py-1 border border-transparent">
+         28
+         <br/>
+         <span class="text-[10px]">
+          10:00
+          <br/>
+          —
+         </span>
+        </div>
+        <!-- Fri 29 -->
+        <div class="py-1 border border-transparent">
+         29
+         <br/>
+         <span class="text-[10px]">
+          14:00
+          <br/>
+          16:00
+         </span>
+        </div>
+        <!-- Sat 30 -->
+        <div class="py-1 border border-transparent bg-[#cbd5f7] rounded-lg">
+         30
+         <br/>
+         <span class="text-[10px]">
+          12:00
+          <br/>
+          14:00
+         </span>
+        </div>
+        <!-- Sun 31 -->
+        <div class="py-1 border border-transparent">
+         31
+         <br/>
+         <span class="text-[10px]">
+          09:00
+          <br/>
+          10:00
+         </span>
+        </div>
+       </div>
+       <!-- Appointments -->
+       <div class="flex flex-col md:flex-row gap-4 mt-4">
+        <div class="flex-1 bg-[#3b3bff] text-white rounded-2xl p-4 flex items-center gap-3 select-none">
+         <i class="fas fa-tooth text-xl">
+         </i>
+         <div>
+          <p class="font-semibold text-xs">
+           Dentist
+          </p>
+          <p class="text-[10px]">
+           09:00-11:00
+          </p>
+          <p class="text-[10px]">
+           Dr. Cameron Williamson
+          </p>
+         </div>
+        </div>
+        <div class="flex-1 bg-[#d6dbff] rounded-2xl p-4 flex items-center gap-3 select-none">
+         <i class="fas fa-hands-helping text-xl">
+         </i>
+         <div>
+          <p class="font-semibold text-xs">
+           Physiotherapy Appointment
+          </p>
+          <p class="text-[10px]">
+           11:00-12:00
+          </p>
+          <p class="text-[10px]">
+           Dr. Kevin Djones
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Upcoming schedule -->
+      <div class="flex flex-col gap-4 select-none">
+       <h3 class="font-semibold text-sm text-[#1a1a1a]">
+        The Upcoming Schedule
+       </h3>
+       <div>
+        <p class="text-xs text-gray-400 mb-2">
+         On Thursday
+        </p>
+        <div class="flex gap-4 flex-wrap">
+         <div class="bg-[#d6dbff] rounded-2xl px-4 py-2 text-xs font-semibold flex items-center gap-2 cursor-default">
+          <span>
+           Health checkup complete
+          </span>
+          <i class="fas fa-pen text-gray-400 text-[10px]">
+          </i>
+          <span class="ml-auto text-[10px] font-normal text-gray-600">
+           11:00 AM
+          </span>
+         </div>
+         <div class="bg-[#d6dbff] rounded-2xl px-4 py-2 text-xs font-semibold flex items-center gap-2 cursor-default">
+          <span>
+           Ophthalmologist
+          </span>
+          <i class="fas fa-eye text-gray-400 text-[10px]">
+          </i>
+          <span class="ml-auto text-[10px] font-normal text-gray-600">
+           14:00 PM
+          </span>
+         </div>
+        </div>
+       </div>
+       <div>
+        <p class="text-xs text-gray-400 mb-2">
+         On Saturday
+        </p>
+        <div class="flex gap-4 flex-wrap">
+         <div class="bg-[#d6dbff] rounded-2xl px-4 py-2 text-xs font-semibold flex items-center gap-2 cursor-default">
+          <span>
+           Cardiologist
+          </span>
+          <i class="fas fa-heart text-red-500 text-[10px]">
+          </i>
+          <span class="ml-auto text-[10px] font-normal text-gray-600">
+           12:00 AM
+          </span>
+         </div>
+         <div class="bg-[#d6dbff] rounded-2xl px-4 py-2 text-xs font-semibold flex items-center gap-2 cursor-default">
+          <span>
+           Neurologist
+          </span>
+          <i class="fas fa-user-ninja text-gray-400 text-[10px]">
+          </i>
+          <span class="ml-auto text-[10px] font-normal text-gray-600">
+           16:00 PM
+          </span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </main>
+  </div>
+ </body>
+</html>
